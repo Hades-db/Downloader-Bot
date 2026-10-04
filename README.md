@@ -43,9 +43,9 @@ Downloader-Bot/
 ├── .gitignore
 ├── LICENSE
 ├── README.md
-├── requirements.txt
 ├── banner.png
 ├── main.py
+├── requirements.txt
 │
 └── app/
     ├── __init__.py
