@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.png" alt="Universal Downloader Bot Banner" width="100%">
+  <img src="Banner.png" alt="Universal Downloader Bot Banner" width="100%">
 </p>
 
 <div align="center">
