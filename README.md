@@ -40,23 +40,23 @@ The codebase strictly follows professional asynchronous patterns, isolating data
 
 ```text
 Downloader-Bot/
-├── main.py                  # Core engine orchestrator & async initialization
-├── requirements.txt         # Project dependencies
-├── .gitignore               # Excludes environment tokens and database caching
-└── app/                     # Main structural package
-    ├── config.py            # Environment credentials parsing (.env)
-    ├── ui_text.py           # Multi-format user layout lines and alerts (Video, Audio, Photo)
-    ├── database/            # Relational database layer (SQLAlchemy + SQLite)
-    │   ├── db_manager.py    # Async queries, user registrations, and cache mutations
-    │   └── models.py        # Database models
-    ├── handlers/            # Interactive event routers (Aiogram)
-    │   ├── commands.py      # Entry filters (/start logic)
-    │   ├── callback.py      # Format split selectors
-    │   └── media.py         # Universal multi-platform URL interceptor
-    ├── keyboards/           # Interactive UI components
-    │   └── inline.py        # Format buttons mapped to MD5 URL hashes
-    └── services/            # Primary backend business actions
-        └── downloader.py    # Multi-platform core extraction driver
+├── main.py
+├── requirements.txt
+├── .gitignore
+└── app/
+    ├── config.py
+    ├── ui_text.py
+    ├── database/
+    │   ├── db_manager.py
+    │   └── models.py
+    ├── handlers/
+    │   ├── commands.py
+    │   ├── callback.py
+    │   └── media.py
+    ├── keyboards/
+    │   └── inline.py
+    └── services/
+        └── downloader.py
 ```
 
 <div align="center">
