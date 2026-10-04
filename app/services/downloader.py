@@ -71,7 +71,8 @@ async def download_and_send_media(bot, chat_id: int, url_id: str, media_type: st
             try:
                 msg = await bot.send_video(chat_id, media_file, caption=f"Done! Loading time: {elapsed_time:.2f} seconds.")
                 if msg.video:
-                    await update_file_id_id_in_cache = await update_file_id_in_cache(url_id, media_type, msg.video.file_id)
+                    await update_file_id_in_cache(url_id, media_type, msg.video.file_id)
+
             except Exception:
                 msg = await bot.send_document(chat_id, media_file, caption=f"Done (Sent as document due to player codecs)! Time: {elapsed_time:.2f}s.")
                 if msg.document:
