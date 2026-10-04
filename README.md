@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Banner.png" alt="Universal Downloader Bot Banner" width="100%">
+  <img src="banner.png" alt="Universal Downloader Bot Banner" width="100%">
 </p>
 
 <div align="center">
@@ -40,22 +40,35 @@ The codebase strictly follows professional asynchronous patterns, isolating data
 
 ```text
 Downloader-Bot/
-├── main.py
-├── requirements.txt
 ├── .gitignore
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── banner.png
+├── main.py
+│
 └── app/
+    ├── __init__.py
     ├── config.py
     ├── ui_text.py
+    │
     ├── database/
+    │   ├── __init__.py
     │   ├── db_manager.py
     │   └── models.py
+    │
     ├── handlers/
-    │   ├── commands.py
+    │   ├── __init__.py
     │   ├── callback.py
+    │   ├── commands.py
     │   └── media.py
+    │
     ├── keyboards/
+    │   ├── __init__.py
     │   └── inline.py
+    │
     └── services/
+        ├── __init__.py
         └── downloader.py
 ```
 
