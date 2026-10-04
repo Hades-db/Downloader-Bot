@@ -16,13 +16,16 @@ async def download_and_send_media(bot, chat_id: int, url_id: str, media_type: st
         return
 
     if cached.tg_file_id:
-        if media_type == "video":
-            await bot.send_video(chat_id, cached.tg_file_id)
-        elif media_type == "audio":
-            await bot.send_audio(chat_id, cached.tg_file_id)
-        elif media_type == "photo":
-            await bot.send_photo(chat_id, cached.tg_file_id)
-        return
+        try:
+            if media_type == "video":
+                await bot.send_video(chat_id, cached.tg_file_id)
+            elif media_type == "audio":
+                await bot.send_audio(chat_id, cached.tg_file_id)
+            elif media_type == "photo":
+                await bot.send_photo(chat_id, cached.tg_file_id)
+            return
+        except Exception:
+            pass
 
     if media_type == "photo":
         ydl_opts = {
@@ -54,15 +57,10 @@ async def download_and_send_media(bot, chat_id: int, url_id: str, media_type: st
                     raise ValueError("Could not extract image from this link.")
                 
                 elapsed_time = time.time() - start_time
-                msg = await bot.send_photo(
-                    chat_id, 
-                    photo_url, 
-                    caption=f"Done! Extraction time: {elapsed_time:.2f} seconds."
-                )
+                msg = await bot.send_photo(chat_id, photo_url, caption=f"Done! Extraction time: {elapsed_time:.2f} seconds.")
                 if msg.photo:
                     await update_file_id_in_cache(url_id, media_type, msg.photo[-1].file_id)
                 return
-
             else:
                 filename = ydl.prepare_filename(info)
 
@@ -70,9 +68,15 @@ async def download_and_send_media(bot, chat_id: int, url_id: str, media_type: st
         media_file = FSInputFile(filename)
         
         if media_type == "video":
-            msg = await bot.send_video(chat_id, media_file, caption=f"Done! Loading time: {elapsed_time:.2f} seconds.")
-            if msg.video:
-                await update_file_id_in_cache(url_id, media_type, msg.video.file_id)
+            try:
+                msg = await bot.send_video(chat_id, media_file, caption=f"Done! Loading time: {elapsed_time:.2f} seconds.")
+                if msg.video:
+                    await update_file_id_id_in_cache = await update_file_id_in_cache(url_id, media_type, msg.video.file_id)
+            except Exception:
+                msg = await bot.send_document(chat_id, media_file, caption=f"Done (Sent as document due to player codecs)! Time: {elapsed_time:.2f}s.")
+                if msg.document:
+                    await update_file_id_in_cache(url_id, media_type, msg.document.file_id)
+                    
         elif media_type == "audio":
             msg = await bot.send_audio(chat_id, media_file, caption=f"Done! Loading time: {elapsed_time:.2f} seconds.")
             if msg.audio:
